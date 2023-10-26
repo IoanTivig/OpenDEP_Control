@@ -1,5 +1,5 @@
 # OpenDEP Control
-DEP experiments automation and control software. With this software you can control all 3 machines which are
+Dielectrophoresis (DEP) experiments automation and control software. With this software you can control all 3 machines which are
 used in DEP experiments: function generator, microscope camera and microfluidic pump. The range of control is limited
 on the DEP application. 
 
