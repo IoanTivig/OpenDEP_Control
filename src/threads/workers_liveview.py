@@ -1,15 +1,14 @@
-# ------------------------------------------------------
-# ----------------- CONVERSION MODULE ------------------
-# ------------------------------------------------------
+# External imports #
 import time
-
 import cv2
+
+# Local imports #
 from PyQt5.QtCore import QObject, pyqtSignal
-from src.classes.webcam_camera_control import *
+from src.classes.video_camera_control import *
 
 """
-Live Capture workers script:
-This file covers all thread functionality to the Live Capture module
+Live View worker script:
+This file covers all thread functionality to the Live View
 This is specific for the long-running functions available in Live Capture module
 """
 
@@ -40,20 +39,28 @@ class LiveViewWorker(QObject):
                 zoom_percentage = self.main_ui.pyqt5_dynamic_spinbox_zoom.value()
 
                 mark = self.main_ui.pyqt5_dynamic_checkbox_marker.isChecked()
-                marker_percentage = self.main_ui.pyqt5_dynamic_spinbox_marker_size.value()
+                marker_percentage = (
+                    self.main_ui.pyqt5_dynamic_spinbox_marker_size_width.value(),
+                    self.main_ui.pyqt5_dynamic_spinbox_marker_size_height.value(),
+                )
 
-                frame = self.video_camera.single_frame_liveview(
-                                                                      marker_position=self.marker_position,
-                                                                      zoom=crop,
-                                                                      zoom_percentage=zoom_percentage,
-                                                                      mark=mark,
-                                                                      marker_percentage=marker_percentage,
-                                                                      )
+                frame = self.video_camera.single_frame_live_view(
+                    marker_position=self.marker_position,
+                    zoom=crop,
+                    zoom_percentage=zoom_percentage,
+                    mark=mark,
+                    marker_percentage=marker_percentage,
+                )
 
-                self.main_ui.pyqt5_dynamic_label_cameraview.setPixmap(QPixmap.fromImage(frame))
+                # get size of the qt label
+                size = self.main_ui.pyqt5_dynamic_label_cameraview.size()
+                frame = frame.scaled(size.width(), size.height(), Qt.KeepAspectRatio)
+                self.main_ui.pyqt5_dynamic_label_cameraview.setPixmap(
+                    QPixmap.fromImage(frame)
+                )
 
             else:
-                print('Finished')
+                print("Finished")
                 self.finished.emit()
                 break
 
@@ -61,6 +68,3 @@ class LiveViewWorker(QObject):
 
     def stop_live_view(self):
         self.thread_active = False
-
-
-

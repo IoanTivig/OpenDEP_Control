@@ -1,10 +1,10 @@
-import os
-
+# External imports #
 import cv2
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.uic.properties import QtGui
 
+# Local imports #
 from src.funcs.camera_functions import *
 
 resolutions_SD = [(800, 600), (1024, 768), (1440, 1080), (1920, 1440)]
@@ -49,13 +49,15 @@ class VideoCamera:
             percentage = 0
             crop_x = int(resolution[1] * percentage / 100)
             crop_y = int(resolution[0] * percentage / 100)
-            cropped = frame[crop_x:resolution[1]-crop_x, crop_y:resolution[0]-crop_y]
+            cropped = frame[
+                crop_x : resolution[1] - crop_x, crop_y : resolution[0] - crop_y
+            ]
 
             # Show the frame to the user
-            cv2.imshow('Input', frame)
+            cv2.imshow("Input", frame)
 
             # Wait for the user to click on the screen
-            cv2.setMouseCallback('Input', self.click_event)
+            cv2.setMouseCallback("Input", self.click_event)
 
             c = cv2.waitKey(1)
             if c == 27:
@@ -66,17 +68,18 @@ class VideoCamera:
 
     def change_input(self, index):
         self.cap.release()
-        try:
-            self.cap = cv2.VideoCapture(index, cv2.CAP_DSHOW)
-            if not self.cap.isOpened():
-                return False
+        self.cap = cv2.VideoCapture(index, cv2.CAP_DSHOW)
+        if not self.cap.isOpened():
+            return False
 
-        except:
-            self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-            if not self.cap.isOpened():
-                return False
-
-    def single_frame_liveview(self, marker_position, zoom=False, zoom_percentage=0, mark=False, marker_percentage=0):
+    def single_frame_live_view(
+        self,
+        marker_position,
+        zoom=False,
+        zoom_percentage=0,
+        mark=False,
+        marker_percentage=0,
+    ):
         # Capture the frame
         ret, frame = self.cap.read()
         qt_img = None
@@ -93,25 +96,27 @@ class VideoCamera:
                 if marker_position is None:
                     marker_position = (frame.shape[1] / 2, frame.shape[0] / 2)
                 else:
-                    marker_position = convert_location_percentage_to_cv(marker_position, frame)
-                frame = mark_image(frame, marker_percentage, marker_position, frame.shape)
-
+                    marker_position = convert_location_percentage_to_cv(
+                        marker_position, frame
+                    )
+                frame = mark_image(
+                    frame, marker_percentage, marker_position, frame.shape
+                )
 
             # Convert to QImage
             flipped_img = cv2.flip(frame, 1)
-            qt_img = QImage(flipped_img.data, frame.shape[1], frame.shape[0], QImage.Format_RGB888)
-            qt_img = qt_img.scaled(640, 480, Qt.KeepAspectRatio)
+            qt_img = QImage(
+                flipped_img.data, frame.shape[1], frame.shape[0], QImage.Format_RGB888
+            )
+            # qt_img = qt_img.scaled(640, 480, Qt.KeepAspectRatio)
 
         # Return frame
         return qt_img
 
-
-    def capture_image(self, resolution=(1920, 1080)):
-        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, resolution[0])
-        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, resolution[1])
-
+    def capture_image(self):
         ret, frame = self.cap.read()
-        cv2.imwrite(os.path.join(os.getcwd(), '../../tests/test.jpg'), frame)
+        if ret:
+            return frame
 
     def click_event(self, event, x, y, flags, params):
         if event == cv2.EVENT_LBUTTONDOWN:
@@ -130,12 +135,16 @@ class VideoCamera:
         rgb_image = cv2.cvtColor(cv_img, cv2.COLOR_BGR2RGB)
         h, w, ch = rgb_image.shape
         bytes_per_line = ch * w
-        convert_to_qt_format = QtGui.QImage(rgb_image.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888)
-        p = convert_to_qt_format.scaled(self.disply_width, self.display_height, Qt.KeepAspectRatio)
+        convert_to_qt_format = QtGui.QImage(
+            rgb_image.data, w, h, bytes_per_line, QtGui.QImage.Format_RGB888
+        )
+        p = convert_to_qt_format.scaled(
+            self.disply_width, self.display_height, Qt.KeepAspectRatio
+        )
         return QPixmap.fromImage(p)
 
 
 if __name__ == "__main__":
-    webcam = WebcamController()
-    #webcam.capture_image()
-    webcam.start_live_view()
+    video_camera = VideoCamera()
+    # video_camera.capture_image()
+    video_camera.start_live_view()

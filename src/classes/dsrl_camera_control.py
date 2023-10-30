@@ -1,14 +1,16 @@
+# External imports #
 import os
 import subprocess
 import time
 import psutil
 
+"""
+Simple python class to use digiCamControl via the single command system to control your camera.
+DigiCamControl (https://digicamcontrol.com/) needs to be installed.
+For documentation please visit https://github.com/Eagleshot/digiCamControlPython
+"""
 
-# Simple python class to use digiCamControl via the single command system to control your camera.
-# Digicamcontrol (https://digicamcontrol.com/) needs to be installed.
-# For documentation please visit https://github.com/Eagleshot/digiCamControlPython
-
-class Camera:
+class DSRLCamera:
     'Python interface for the open source digicamcontrol software. Initialize the program by specifying where digiCamControl is installed. If left empty, the default location (C:/Program Files (x86)/digiCamControl) will be assumed. If openProgram is set to true, digiCamControl will automatically be opened in the background.'
     captureCommand = "capture "
 
