@@ -4,7 +4,7 @@ usual used in DEP experiments: function generator, microscope camera and microfl
 on the DEP application. 
 
 At this moment we try to make the software function with most video cameras or DSRL cameras (though the video camera option or capture card
-is recommended), Agilent Function generators (through the seral port,)  In the future control over Fluidgent microfluidic pumps will be added
+is recommended), Agilent Function generators (through the seral port)  In the future control over Fluidgent microfluidic pumps will be added
 and compatibility will be improved.
 
 It is a part of OpenDEP project, and one of the three programs delivered by the OpenDEP project: 
