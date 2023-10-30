@@ -55,3 +55,4 @@ class GraphWidgetLiveCapture(QWidget):
         self.canvas.axes.add_patch(rect)
 
         self.canvas.draw()
+

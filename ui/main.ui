@@ -12,8 +12,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>1280</width>
-    <height>720</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -30,7 +30,7 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="1,1">
    <property name="spacing">
-    <number>10</number>
+    <number>5</number>
    </property>
    <property name="leftMargin">
     <number>10</number>
@@ -156,13 +156,13 @@ QTabBar::tab:left:only-one, QTabBar::tab:right:only-one {
 }</string>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="OpenDEPsinglecell_tab">
       <attribute name="title">
        <string>Timed Capture</string>
       </attribute>
-      <layout class="QVBoxLayout" name="verticalLayout_6" stretch="2,1,2,1,3">
+      <layout class="QVBoxLayout" name="verticalLayout_6" stretch="2,1,2,1,1,4">
        <property name="spacing">
         <number>6</number>
        </property>
@@ -581,7 +581,7 @@ border-radius: 4px;</string>
           </property>
           <item>
            <widget class="QFrame" name="horizontalFrame_17">
-            <layout class="QHBoxLayout" name="horizontalLayout_28" stretch="0,2,1,1,1">
+            <layout class="QHBoxLayout" name="horizontalLayout_28" stretch="1,1,1,1,1">
              <property name="spacing">
               <number>5</number>
              </property>
@@ -656,7 +656,7 @@ QCheckBox::indicator:checked:pressed
              <item>
               <widget class="QComboBox" name="pyqt5_dynamic_odsc_combo_generators">
                <property name="enabled">
-                <bool>false</bool>
+                <bool>true</bool>
                </property>
                <property name="minimumSize">
                 <size>
@@ -667,7 +667,7 @@ QCheckBox::indicator:checked:pressed
                <property name="font">
                 <font>
                  <family>Verdana</family>
-                 <pointsize>8</pointsize>
+                 <pointsize>9</pointsize>
                 </font>
                </property>
                <property name="styleSheet">
@@ -1615,7 +1615,13 @@ border-radius: 4px;</string>
                <number>5</number>
               </property>
               <item>
-               <widget class="QCheckBox" name="pyqt5_dynamic_odsc_checkbox_rotate">
+               <widget class="QCheckBox" name="pyqt5_dynamic_checkbox_rotate">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>22</height>
+                 </size>
+                </property>
                 <property name="font">
                  <font>
                   <family>Verdana</family>
@@ -1671,7 +1677,7 @@ QCheckBox::indicator:checked:pressed
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="pyqt5_dynamic_odsc_combo_rotation">
+               <widget class="QComboBox" name="pyqt5_dynamic_combo_rotation">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -1687,7 +1693,7 @@ QCheckBox::indicator:checked:pressed
                 <property name="font">
                  <font>
                   <family>Verdana</family>
-                  <pointsize>8</pointsize>
+                  <pointsize>9</pointsize>
                  </font>
                 </property>
                 <property name="styleSheet">
@@ -1857,7 +1863,7 @@ background-color: rgb(248,214,176);
              </layout>
             </item>
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="3,1">
+             <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="2,1">
               <property name="spacing">
                <number>5</number>
               </property>
@@ -2100,6 +2106,305 @@ QPushButton:pressed{
         </widget>
        </item>
        <item>
+        <widget class="QFrame" name="verticalFrame_6">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);
+border-radius: 4px;</string>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,1,2,2">
+          <property name="spacing">
+           <number>10</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_21" stretch="1,1">
+            <property name="spacing">
+             <number>5</number>
+            </property>
+            <property name="leftMargin">
+             <number>5</number>
+            </property>
+            <property name="topMargin">
+             <number>5</number>
+            </property>
+            <property name="rightMargin">
+             <number>5</number>
+            </property>
+            <property name="bottomMargin">
+             <number>5</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="static_odsc_label_11">
+              <property name="font">
+               <font>
+                <family>Verdana</family>
+                <pointsize>9</pointsize>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(75, 75, 75);</string>
+              </property>
+              <property name="text">
+               <string>Point number:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="pyqt5_dynamic_odsc_label_current_point">
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Verdana</family>
+                <pointsize>12</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border-radius: 4px;
+padding: 5px;
+background-color: rgb(250,240,220);
+</string>
+              </property>
+              <property name="text">
+               <string>0</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_23" stretch="1,1">
+            <property name="spacing">
+             <number>5</number>
+            </property>
+            <property name="leftMargin">
+             <number>5</number>
+            </property>
+            <property name="topMargin">
+             <number>5</number>
+            </property>
+            <property name="rightMargin">
+             <number>5</number>
+            </property>
+            <property name="bottomMargin">
+             <number>5</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="static_odsc_label_7">
+              <property name="font">
+               <font>
+                <family>Verdana</family>
+                <pointsize>9</pointsize>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(75, 75, 75);</string>
+              </property>
+              <property name="text">
+               <string>Countdown:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="pyqt5_dynamic_odsc_label_countdown">
+              <property name="minimumSize">
+               <size>
+                <width>50</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Verdana</family>
+                <pointsize>12</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border-radius: 4px;
+padding: 5px;
+background-color: rgb(250,240,220);
+</string>
+              </property>
+              <property name="text">
+               <string>0</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="1,2">
+            <property name="spacing">
+             <number>5</number>
+            </property>
+            <property name="leftMargin">
+             <number>5</number>
+            </property>
+            <property name="topMargin">
+             <number>5</number>
+            </property>
+            <property name="rightMargin">
+             <number>5</number>
+            </property>
+            <property name="bottomMargin">
+             <number>5</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="static_odsc_label_10">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>25</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Verdana</family>
+                <pointsize>9</pointsize>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(75, 75, 75);</string>
+              </property>
+              <property name="text">
+               <string>Current Freq.:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="pyqt5_dynamic_odsc_label_current_frequency">
+              <property name="font">
+               <font>
+                <family>Verdana</family>
+                <pointsize>12</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border-radius: 4px;
+padding: 5px;
+background-color: rgb(250,240,220);
+</string>
+              </property>
+              <property name="text">
+               <string>0 Hz</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_20" stretch="1,2">
+            <property name="spacing">
+             <number>5</number>
+            </property>
+            <property name="leftMargin">
+             <number>5</number>
+            </property>
+            <property name="topMargin">
+             <number>5</number>
+            </property>
+            <property name="rightMargin">
+             <number>5</number>
+            </property>
+            <property name="bottomMargin">
+             <number>5</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="static_odsc_label_6">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <family>Verdana</family>
+                <pointsize>9</pointsize>
+                <weight>50</weight>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(75, 75, 75);</string>
+              </property>
+              <property name="text">
+               <string>Next Freq.:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="pyqt5_dynamic_odsc_label_next_frequency">
+              <property name="font">
+               <font>
+                <family>Verdana</family>
+                <pointsize>12</pointsize>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">border-radius: 4px;
+padding: 5px;
+background-color: rgb(250,240,220);
+</string>
+              </property>
+              <property name="text">
+               <string>0 Hz</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <spacer name="verticalSpacer_3">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -2125,7 +2430,7 @@ QPushButton:pressed{
           <string notr="true">background-color: rgb(255, 255, 255);
 border-radius: 4px;</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_14" stretch="0,0,0,0,0">
+         <layout class="QVBoxLayout" name="verticalLayout_14" stretch="0,0,0,0,0,0,0">
           <item>
            <widget class="QFrame" name="horizontalFrame_20">
             <layout class="QHBoxLayout" name="horizontalLayout_32" stretch="0,2,1,1">
@@ -2315,6 +2620,183 @@ QPushButton:pressed{
            </widget>
           </item>
           <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_19" stretch="1,1,1">
+            <property name="spacing">
+             <number>10</number>
+            </property>
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="static_odsc_label_14">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>21</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Verdana</family>
+                <pointsize>9</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(75, 75, 75);</string>
+              </property>
+              <property name="text">
+               <string>Live View camera index:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="pyqt5_dynamic_combo_camera_index">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Verdana</family>
+                <pointsize>9</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QComboBox
+{
+border-radius: 4px;
+padding-left: 5px;
+background-color: rgb(255, 184, 90);
+}
+
+QComboBox:hover
+{
+background-color: rgb(248,214,176);
+}
+
+QComboBox:disabled{
+	background-color: rgb(243, 239, 219);
+}
+
+QComboBox::drop-down{
+background-color: transparent;
+border-radius: 4px;
+}
+
+QComboBox::drop-down:hover{
+background-color: transparent;
+}
+
+QComboBox::down-arrow
+{
+image: url(:/ui/qt/resources/dropdown/dropdown_arrow.png);
+margin-right: 5px;
+}
+
+QComboBox QListView {
+background-color: rgb(255, 184, 90);
+padding:4px;
+}
+
+QComboBox QListView::item {
+padding:15px;
+}
+
+
+</string>
+              </property>
+              <property name="editable">
+               <bool>false</bool>
+              </property>
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <property name="frame">
+               <bool>true</bool>
+              </property>
+              <item>
+               <property name="text">
+                <string>Index 1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Index 2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Index 3</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Index 4</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Index 5</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pyqt5_dynamic_button_refresh_live_view">
+              <property name="minimumSize">
+               <size>
+                <width>91</width>
+                <height>31</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Verdana</family>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+	border-radius: 4px;
+	background-color: rgb(255, 184, 90);
+	padding-left: 2px;
+	color: rgb(75, 75, 75);
+}
+QPushButton:hover{
+	background-color: rgb(248,214,176);	
+}
+QPushButton:pressed{
+	background-color: rgb(179, 197, 192);
+}
+QPushButton:disabled{
+	background-color: rgb(243, 239, 219);
+}</string>
+              </property>
+              <property name="text">
+               <string>Refresh</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
            <widget class="QRadioButton" name="pyqt5_dynamic_odsc_radio_use_video">
             <property name="font">
              <font>
@@ -2363,12 +2845,175 @@ QRadioButton::indicator:checked:pressed
 }</string>
             </property>
             <property name="text">
-             <string>Video Camera - OpenCV</string>
+             <string>USB Camera / DSRL Camera (HDMI)</string>
             </property>
             <property name="checked">
              <bool>false</bool>
             </property>
            </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QComboBox" name="pyqt5_dynamic_combo_aspect_ratio">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Verdana</family>
+                <pointsize>9</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QComboBox
+{
+border-radius: 4px;
+padding-left: 5px;
+background-color: rgb(255, 184, 90);
+}
+
+QComboBox:hover
+{
+background-color: rgb(248,214,176);
+}
+
+QComboBox:disabled{
+	background-color: rgb(243, 239, 219);
+}
+
+QComboBox::drop-down{
+background-color: transparent;
+border-radius: 4px;
+}
+
+QComboBox::drop-down:hover{
+background-color: transparent;
+}
+
+QComboBox::down-arrow
+{
+image: url(:/ui/qt/resources/dropdown/dropdown_arrow.png);
+margin-right: 5px;
+}
+
+QComboBox QListView {
+background-color: rgb(255, 184, 90);
+padding:4px;
+}
+
+QComboBox QListView::item {
+padding:15px;
+}
+
+
+</string>
+              </property>
+              <property name="editable">
+               <bool>false</bool>
+              </property>
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <property name="frame">
+               <bool>true</bool>
+              </property>
+              <item>
+               <property name="text">
+                <string>SD (4:3)</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>HD (16:9)</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="pyqt5_dynamic_combo_resolution">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>22</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Verdana</family>
+                <pointsize>9</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QComboBox
+{
+border-radius: 4px;
+padding-left: 5px;
+background-color: rgb(255, 184, 90);
+}
+
+QComboBox:hover
+{
+background-color: rgb(248,214,176);
+}
+
+QComboBox:disabled{
+	background-color: rgb(243, 239, 219);
+}
+
+QComboBox::drop-down{
+background-color: transparent;
+border-radius: 4px;
+}
+
+QComboBox::drop-down:hover{
+background-color: transparent;
+}
+
+QComboBox::down-arrow
+{
+image: url(:/ui/qt/resources/dropdown/dropdown_arrow.png);
+margin-right: 5px;
+}
+
+QComboBox QListView {
+background-color: rgb(255, 184, 90);
+padding:4px;
+}
+
+QComboBox QListView::item {
+padding:15px;
+}
+
+
+</string>
+              </property>
+              <property name="editable">
+               <bool>false</bool>
+              </property>
+              <property name="currentIndex">
+               <number>0</number>
+              </property>
+              <property name="frame">
+               <bool>true</bool>
+              </property>
+              <item>
+               <property name="text">
+                <string>Resolution</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <widget class="QRadioButton" name="pyqt5_dynamic_odsc_radio_use_dsrl">
@@ -2419,7 +3064,7 @@ QRadioButton::indicator:checked:pressed
 }</string>
             </property>
             <property name="text">
-             <string>DSRL Camera - Digi Cam Control</string>
+             <string>DSRL Camera (USB + HDMI)</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -2697,13 +3342,13 @@ QPushButton:pressed{
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>0</height>
+       <height>520</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>760</width>
-       <height>16777215</height>
+       <width>9999</width>
+       <height>9999</height>
       </size>
      </property>
      <property name="styleSheet">
@@ -2713,7 +3358,7 @@ border-radius: 3px;
 
 </string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_5" stretch="1,3,0,1">
+     <layout class="QVBoxLayout" name="verticalLayout_5" stretch="1,0,1">
       <property name="spacing">
        <number>5</number>
       </property>
@@ -2730,306 +3375,7 @@ border-radius: 3px;
        <number>10</number>
       </property>
       <item>
-       <widget class="QFrame" name="verticalFrame_6">
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 255, 255);
-border-radius: 4px;</string>
-        </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="1,1,2,2">
-         <property name="spacing">
-          <number>10</number>
-         </property>
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_21" stretch="1,1">
-           <property name="spacing">
-            <number>5</number>
-           </property>
-           <property name="leftMargin">
-            <number>5</number>
-           </property>
-           <property name="topMargin">
-            <number>5</number>
-           </property>
-           <property name="rightMargin">
-            <number>5</number>
-           </property>
-           <property name="bottomMargin">
-            <number>5</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="static_odsc_label_11">
-             <property name="font">
-              <font>
-               <family>Verdana</family>
-               <pointsize>9</pointsize>
-               <weight>50</weight>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: rgb(75, 75, 75);</string>
-             </property>
-             <property name="text">
-              <string>Point number:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="pyqt5_dynamic_odsc_label_current_point">
-             <property name="minimumSize">
-              <size>
-               <width>50</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Verdana</family>
-               <pointsize>12</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-radius: 4px;
-padding: 5px;
-background-color: rgb(250,240,220);
-</string>
-             </property>
-             <property name="text">
-              <string>0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_23" stretch="1,1">
-           <property name="spacing">
-            <number>5</number>
-           </property>
-           <property name="leftMargin">
-            <number>5</number>
-           </property>
-           <property name="topMargin">
-            <number>5</number>
-           </property>
-           <property name="rightMargin">
-            <number>5</number>
-           </property>
-           <property name="bottomMargin">
-            <number>5</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="static_odsc_label_7">
-             <property name="font">
-              <font>
-               <family>Verdana</family>
-               <pointsize>9</pointsize>
-               <weight>50</weight>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: rgb(75, 75, 75);</string>
-             </property>
-             <property name="text">
-              <string>Countdown:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="pyqt5_dynamic_odsc_label_countdown">
-             <property name="minimumSize">
-              <size>
-               <width>50</width>
-               <height>0</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Verdana</family>
-               <pointsize>12</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-radius: 4px;
-padding: 5px;
-background-color: rgb(250,240,220);
-</string>
-             </property>
-             <property name="text">
-              <string>0</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_15" stretch="1,2">
-           <property name="spacing">
-            <number>5</number>
-           </property>
-           <property name="leftMargin">
-            <number>5</number>
-           </property>
-           <property name="topMargin">
-            <number>5</number>
-           </property>
-           <property name="rightMargin">
-            <number>5</number>
-           </property>
-           <property name="bottomMargin">
-            <number>5</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="static_odsc_label_10">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="font">
-              <font>
-               <family>Verdana</family>
-               <pointsize>9</pointsize>
-               <weight>50</weight>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: rgb(75, 75, 75);</string>
-             </property>
-             <property name="text">
-              <string>Current Freq.:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="pyqt5_dynamic_odsc_label_current_frequency">
-             <property name="font">
-              <font>
-               <family>Verdana</family>
-               <pointsize>12</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-radius: 4px;
-padding: 5px;
-background-color: rgb(250,240,220);
-</string>
-             </property>
-             <property name="text">
-              <string>0 Hz</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_20" stretch="1,2">
-           <property name="spacing">
-            <number>5</number>
-           </property>
-           <property name="leftMargin">
-            <number>5</number>
-           </property>
-           <property name="topMargin">
-            <number>5</number>
-           </property>
-           <property name="rightMargin">
-            <number>5</number>
-           </property>
-           <property name="bottomMargin">
-            <number>5</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="static_odsc_label_6">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="font">
-              <font>
-               <family>Verdana</family>
-               <pointsize>9</pointsize>
-               <weight>50</weight>
-               <bold>false</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">color: rgb(75, 75, 75);</string>
-             </property>
-             <property name="text">
-              <string>Next Freq.:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="pyqt5_dynamic_odsc_label_next_frequency">
-             <property name="font">
-              <font>
-               <family>Verdana</family>
-               <pointsize>12</pointsize>
-               <weight>75</weight>
-               <bold>true</bold>
-              </font>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">border-radius: 4px;
-padding: 5px;
-background-color: rgb(250,240,220);
-</string>
-             </property>
-             <property name="text">
-              <string>0 Hz</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_2">
+       <spacer name="verticalSpacer_4">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
@@ -3052,7 +3398,7 @@ border-radius: 4px;</string>
           <enum>QLayout::SetDefaultConstraint</enum>
          </property>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_19" stretch="1,1,1,1">
+          <layout class="QHBoxLayout" name="horizontalLayout_22" stretch="1,1,1,1,1">
            <property name="spacing">
             <number>10</number>
            </property>
@@ -3069,164 +3415,317 @@ border-radius: 4px;</string>
             <number>0</number>
            </property>
            <item>
-            <widget class="QPushButton" name="pyqt5_dynamic_odsc_button_start_live_view">
+            <widget class="QCheckBox" name="pyqt5_dynamic_checkbox_marker">
              <property name="minimumSize">
               <size>
-               <width>91</width>
-               <height>31</height>
+               <width>0</width>
+               <height>22</height>
               </size>
              </property>
              <property name="font">
               <font>
                <family>Verdana</family>
-               <pointsize>14</pointsize>
+               <pointsize>10</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
               </font>
              </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
              <property name="styleSheet">
-              <string notr="true">QPushButton {
-	border-radius: 4px;
-	background-color: rgb(255, 184, 90);
-	padding-left: 2px;
-	color: rgb(75, 75, 75);
+              <string notr="true">QCheckBox::indicator
+{
+width: 15px;
+height: 15px;
+
 }
-QPushButton:hover{
-	background-color: rgb(248,214,176);	
+
+QCheckBox::indicator::unchecked
+{
+	image: url(:/ui/qt/resources/checkbox/checkbox_unchecked.png);
 }
-QPushButton:pressed{
-	background-color: rgb(179, 197, 192);
+
+QCheckBox::indicator:unchecked:hover
+{
+	image: url(:/ui/qt/resources/checkbox/checkbox_unchecked_hover.png);
 }
-QPushButton:disabled{
-	background-color: rgb(243, 239, 219);
+
+QCheckBox::indicator:unchecked:pressed
+{
+	image: url(:/ui/qt/resources/checkbox/checkbox_unchecked_pressed.png);
+}
+
+QCheckBox::indicator::checked 
+{
+	image: url(:/ui/qt/resources/checkbox/checkbox_checked.png);
+}
+
+QCheckBox::indicator:checked:hover 
+{
+	image: url(:/ui/qt/resources/checkbox/checkbox_checked_hover.png);
+}
+
+QCheckBox::indicator:checked:pressed 
+{
+	image: url(:/ui/qt/resources/checkbox/checkbox_checked_pressed.png);
 }</string>
              </property>
              <property name="text">
-              <string>Live View</string>
+              <string>Marker (%)</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pyqt5_dynamic_odsc_button_stop_capture_2">
+            <widget class="QSpinBox" name="pyqt5_dynamic_spinbox_marker_size">
              <property name="enabled">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
              <property name="minimumSize">
               <size>
-               <width>91</width>
-               <height>31</height>
+               <width>0</width>
+               <height>22</height>
               </size>
              </property>
              <property name="font">
               <font>
                <family>Verdana</family>
-               <pointsize>14</pointsize>
+               <pointsize>9</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">QPushButton {
-	border-radius: 4px;
-	background-color: rgb(255, 184, 90);
-	padding-left: 2px;
-	color: rgb(75, 75, 75);
+              <string notr="true">QSpinBox {
+background-color: rgb(248, 214, 176);
+border-radius: 4px;
+padding: 0px 2px 0px 2px;
+border-width: 3;
 }
-QPushButton:hover{
-	background-color: rgb(248,214,176);	
+
+QSpinBox:hover {
+background-color: rgb(255, 184, 90);
 }
-QPushButton:pressed{
-	background-color: rgb(179, 197, 192);
+
+QSpinBox:selected {
+background-color: rgb(255, 184, 90);
 }
-QPushButton:disabled{
-	background-color: rgb(200, 220, 210);
+
+QSpinBox::up-button {
+subcontrol-origin: border;
+subcontrol-position: right;
+image: url(:/ui/qt/resources/spinbox/spinbox_hover_right.png);
+ }
+
+QSpinBox::down-button {
+subcontrol-origin: border;
+subcontrol-position: left;
+image: url(:/ui/qt/resources/spinbox/spinbox_hover_left.png);
+ }
+
+QSpinBox::up-button:hover {
+image: url(:/ui/qt/resources/spinbox/spinbox_right.png);
+ }
+
+QSpinBox::down-button:hover {
+image: url(:/ui/qt/resources/spinbox/spinbox_left.png);	
+ }
+
+QSpinBox::up-button:pressed {
+image: url(:/ui/qt/resources/spinbox/spinbox_pressed_right.png);
 }
-QPushButton:disabled{
-	background-color: rgb(243, 239, 219);
-}</string>
+
+QSpinBox::down-button:pressed {
+image: url(:/ui/qt/resources/spinbox/spinbox_pressed_left.png);
+ }</string>
              </property>
-             <property name="text">
-              <string>btn1</string>
+             <property name="frame">
+              <bool>true</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>false</bool>
+             </property>
+             <property name="keyboardTracking">
+              <bool>true</bool>
+             </property>
+             <property name="minimum">
+              <number>5</number>
+             </property>
+             <property name="maximum">
+              <number>100</number>
+             </property>
+             <property name="singleStep">
+              <number>1</number>
+             </property>
+             <property name="value">
+              <number>25</number>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pyqt5_dynamic_odsc_button_resume_capture_2">
-             <property name="enabled">
-              <bool>false</bool>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
              </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="pyqt5_dynamic_checkbox_zoom">
              <property name="minimumSize">
               <size>
-               <width>91</width>
-               <height>31</height>
+               <width>0</width>
+               <height>22</height>
               </size>
              </property>
              <property name="font">
               <font>
                <family>Verdana</family>
-               <pointsize>14</pointsize>
+               <pointsize>10</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
               </font>
              </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
              <property name="styleSheet">
-              <string notr="true">QPushButton {
-	border-radius: 4px;
-	background-color: rgb(255, 184, 90);
-	padding-left: 2px;
-	color: rgb(75, 75, 75);
+              <string notr="true">QCheckBox::indicator
+{
+width: 15px;
+height: 15px;
+
 }
-QPushButton:hover{
-	background-color: rgb(248,214,176);	
+
+QCheckBox::indicator::unchecked
+{
+	image: url(:/ui/qt/resources/checkbox/checkbox_unchecked.png);
 }
-QPushButton:pressed{
-	background-color: rgb(179, 197, 192);
+
+QCheckBox::indicator:unchecked:hover
+{
+	image: url(:/ui/qt/resources/checkbox/checkbox_unchecked_hover.png);
 }
-QPushButton:disabled{
-	background-color: rgb(200, 220, 210);
+
+QCheckBox::indicator:unchecked:pressed
+{
+	image: url(:/ui/qt/resources/checkbox/checkbox_unchecked_pressed.png);
 }
-QPushButton:disabled{
-	background-color: rgb(243, 239, 219);
+
+QCheckBox::indicator::checked 
+{
+	image: url(:/ui/qt/resources/checkbox/checkbox_checked.png);
+}
+
+QCheckBox::indicator:checked:hover 
+{
+	image: url(:/ui/qt/resources/checkbox/checkbox_checked_hover.png);
+}
+
+QCheckBox::indicator:checked:pressed 
+{
+	image: url(:/ui/qt/resources/checkbox/checkbox_checked_pressed.png);
 }</string>
              </property>
              <property name="text">
-              <string>btn2</string>
+              <string>Zoom (%):</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pyqt5_dynamic_odsc_button_pause_capture_2">
+            <widget class="QSpinBox" name="pyqt5_dynamic_spinbox_zoom">
              <property name="enabled">
-              <bool>false</bool>
+              <bool>true</bool>
              </property>
              <property name="minimumSize">
               <size>
-               <width>91</width>
-               <height>31</height>
+               <width>0</width>
+               <height>22</height>
               </size>
              </property>
              <property name="font">
               <font>
                <family>Verdana</family>
-               <pointsize>14</pointsize>
+               <pointsize>9</pointsize>
+               <weight>50</weight>
+               <bold>false</bold>
               </font>
              </property>
              <property name="styleSheet">
-              <string notr="true">QPushButton {
-	border-radius: 4px;
-	background-color: rgb(255, 184, 90);
-	padding-left: 2px;
-	color: rgb(75, 75, 75);
+              <string notr="true">QSpinBox {
+background-color: rgb(248, 214, 176);
+border-radius: 4px;
+padding: 0px 2px 0px 2px;
+border-width: 3;
 }
-QPushButton:hover{
-	background-color: rgb(248,214,176);	
+
+QSpinBox:hover {
+background-color: rgb(255, 184, 90);
 }
-QPushButton:pressed{
-	background-color: rgb(179, 197, 192);
+
+QSpinBox:selected {
+background-color: rgb(255, 184, 90);
 }
-QPushButton:disabled{
-	background-color: rgb(200, 220, 210);
+
+QSpinBox::up-button {
+subcontrol-origin: border;
+subcontrol-position: right;
+image: url(:/ui/qt/resources/spinbox/spinbox_hover_right.png);
+ }
+
+QSpinBox::down-button {
+subcontrol-origin: border;
+subcontrol-position: left;
+image: url(:/ui/qt/resources/spinbox/spinbox_hover_left.png);
+ }
+
+QSpinBox::up-button:hover {
+image: url(:/ui/qt/resources/spinbox/spinbox_right.png);
+ }
+
+QSpinBox::down-button:hover {
+image: url(:/ui/qt/resources/spinbox/spinbox_left.png);	
+ }
+
+QSpinBox::up-button:pressed {
+image: url(:/ui/qt/resources/spinbox/spinbox_pressed_right.png);
 }
-QPushButton:disabled{
-	background-color: rgb(243, 239, 219);
-}</string>
+
+QSpinBox::down-button:pressed {
+image: url(:/ui/qt/resources/spinbox/spinbox_pressed_left.png);
+ }</string>
              </property>
-             <property name="text">
-              <string>btn3</string>
+             <property name="frame">
+              <bool>true</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+             <property name="readOnly">
+              <bool>false</bool>
+             </property>
+             <property name="keyboardTracking">
+              <bool>true</bool>
+             </property>
+             <property name="minimum">
+              <number>5</number>
+             </property>
+             <property name="maximum">
+              <number>90</number>
+             </property>
+             <property name="singleStep">
+              <number>5</number>
+             </property>
+             <property name="value">
+              <number>5</number>
              </property>
             </widget>
            </item>
@@ -3239,14 +3738,14 @@ QPushButton:disabled{
        <widget class="QFrame" name="horizontalFrame_11">
         <property name="minimumSize">
          <size>
-          <width>650</width>
-          <height>490</height>
+          <width>0</width>
+          <height>0</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>650</width>
-          <height>490</height>
+          <height>9999</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -3268,11 +3767,33 @@ border-radius: 4px;
           <number>5</number>
          </property>
          <item>
-          <widget class="QLabel" name="pyqt5_dynamic_label_cameraview">
-           <property name="text">
-            <string/>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <property name="spacing">
+            <number>0</number>
            </property>
-          </widget>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="pyqt5_dynamic_label_cameraview">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </item>
         </layout>
        </widget>
@@ -3293,12 +3814,12 @@ border-radius: 4px;
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>63</x>
-     <y>199</y>
+     <x>82</x>
+     <y>207</y>
     </hint>
     <hint type="destinationlabel">
-     <x>270</x>
-     <y>202</y>
+     <x>818</x>
+     <y>403</y>
     </hint>
    </hints>
   </connection>
@@ -3309,12 +3830,12 @@ border-radius: 4px;
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>35</x>
-     <y>192</y>
+     <x>54</x>
+     <y>207</y>
     </hint>
     <hint type="destinationlabel">
-     <x>414</x>
-     <y>238</y>
+     <x>593</x>
+     <y>256</y>
     </hint>
    </hints>
   </connection>
@@ -3325,12 +3846,12 @@ border-radius: 4px;
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>118</x>
-     <y>199</y>
+     <x>119</x>
+     <y>207</y>
     </hint>
     <hint type="destinationlabel">
-     <x>306</x>
-     <y>207</y>
+     <x>155</x>
+     <y>215</y>
     </hint>
    </hints>
   </connection>
@@ -3341,12 +3862,12 @@ border-radius: 4px;
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>34</x>
-     <y>194</y>
+     <x>53</x>
+     <y>207</y>
     </hint>
     <hint type="destinationlabel">
-     <x>437</x>
-     <y>228</y>
+     <x>629</x>
+     <y>256</y>
     </hint>
    </hints>
   </connection>
@@ -3357,12 +3878,12 @@ border-radius: 4px;
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>54</x>
-     <y>199</y>
+     <x>73</x>
+     <y>207</y>
     </hint>
     <hint type="destinationlabel">
-     <x>462</x>
-     <y>179</y>
+     <x>497</x>
+     <y>215</y>
     </hint>
    </hints>
   </connection>
@@ -3373,8 +3894,8 @@ border-radius: 4px;
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>99</x>
-     <y>199</y>
+     <x>118</x>
+     <y>207</y>
     </hint>
     <hint type="destinationlabel">
      <x>384</x>

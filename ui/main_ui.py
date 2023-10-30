@@ -6,6 +6,7 @@ import time
 import numpy as np
 
 from PyQt5.QtCore import QThread
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog, QFileDialog
 from PyQt5.uic import loadUi
 from PyQt5 import QtGui
@@ -32,20 +33,28 @@ class MainUI(QDialog):
         QDialog.__init__(self)
         loadUi("ui/main.ui", self)
         self.setWindowTitle("OpenDEP Control")
-        #self.setWindowIcon(QtGui.QIcon("icon.png"))
+        self.setWindowIcon(QIcon("icon.png"))
 
-        self.camera = dccp.Camera()
-        self.webcam = WebcamController(main_ui=self)
-        self.generator = func_gen.FunctionGenerator()
+        self.resolutions_SD = [(800, 600), (1024, 768), (1440, 1080), (1920, 1440)]
+        self.resolutions_HD = [(854, 480), (1280, 720), (1920, 1080), (2560, 1440)]
+
+        self.threads = []
 
         self.camera_details_list = []
         self.single_capture_index = 0
         self.stop_thread = False
         self.pause_thread = False
 
-        self.camera.change_software_path(self.pyqt5_dynamic_odsc_entry_folder_location_digicam.text())
+        self.generator = func_gen.FunctionGenerator()
+        self.video_camera = VideoCamera(main_ui=self)
+        self.camera_live_view()
+
+        self.live_view_populate_with_resolutions()
+
+        #self.camera.change_software_path(self.pyqt5_dynamic_odsc_entry_folder_location_digicam.text())
         self.pyqt5_dynamic_odsc_entry_output_path.setText(os.path.expanduser("~/Desktop"))
 
+        # Capture connections
         self.pyqt5_dynamic_odsc_button_start_capture.clicked.connect(self.multi_capture)
         self.pyqt5_dynamic_odsc_button_stop_capture.clicked.connect(self.stop_capture)
         self.pyqt5_dynamic_odsc_button_pause_capture.clicked.connect(self.pause_capture)
@@ -55,6 +64,14 @@ class MainUI(QDialog):
         self.pyqt5_dynamic_odsc_button_reload_cameras.clicked.connect(self.get_cameras)
         self.pyqt5_dynamic_odsc_combo_camera.currentIndexChanged.connect(self.select_camera)
 
+        # Live View connections
+        #self.worker_live_view.image_update.connect(self.live_view_slot)
+
+        self.pyqt5_dynamic_label_cameraview.mousePressEvent = self.live_view_click_event
+        self.pyqt5_dynamic_combo_aspect_ratio.currentIndexChanged.connect(self.live_view_populate_with_resolutions)
+        self.pyqt5_dynamic_button_refresh_live_view.clicked.connect(self.refresh_live_view)
+
+        # Generator connections
         self.pyqt5_dynamic_odsc_button_reload_generator.clicked.connect(self.get_generators)
         self.pyqt5_dynamic_odsc_combo_generators.currentIndexChanged.connect(self.select_generator)
         self.pyqt5_dynamic_odsc_button_generator_output_on.clicked.connect(self.generator_output_on)
@@ -62,7 +79,7 @@ class MainUI(QDialog):
         self.pyqt5_dynamic_odsc_button_generator_download.clicked.connect(self.generator_download_parameters)
         self.pyqt5_dynamic_odsc_button_generator_upload.clicked.connect(self.generator_upload_parameters)
 
-        self.pyqt5_dynamic_odsc_button_start_live_view.clicked.connect(self.webcam_live_view)
+        self.pyqt5_dynamic_button_refresh_live_view.clicked.connect(self.camera_live_view)
 
         self.pyqt5_dynamic_odsc_button_loadfolder_output.clicked.connect(
             lambda: self.getFolderPath(self.pyqt5_dynamic_odsc_entry_output_path)
@@ -79,8 +96,59 @@ class MainUI(QDialog):
             lambda: self.single_capture('single_capture_' + str(self.single_capture_index))
         )
 
-    def OPEN(self):
-        self.show()
+    def live_view_slot(self, image):
+        self.pyqt5_dynamic_label_cameraview.setPixmap(QPixmap.fromImage(image))
+
+    def camera_live_view(self, resolution=resolutions_SD[2]):
+        self.threads.append(QThread())
+        self.thread_live_view = self.threads[-1]
+        self.worker_live_view = LiveViewWorker(main_ui=self,
+                                               video_camera=self.video_camera,
+                                               resolution=resolution)
+
+        self.worker_live_view.moveToThread(self.thread_live_view)
+        self.thread_live_view.started.connect(self.worker_live_view.start_live_view)
+        self.worker_live_view.finished.connect(self.thread_live_view.quit)
+        self.worker_live_view.finished.connect(self.worker_live_view.deleteLater)
+        self.thread_live_view.finished.connect(self.thread_live_view.deleteLater)
+        self.thread_live_view.start()
+
+    def refresh_live_view(self):
+        camera_index = int(self.pyqt5_dynamic_combo_camera_index.currentIndex())
+        if self.pyqt5_dynamic_combo_aspect_ratio.currentIndex() == 0:
+            local_resolution = self.resolutions_SD[self.pyqt5_dynamic_combo_resolution.currentIndex()]
+        elif self.pyqt5_dynamic_combo_aspect_ratio.currentIndex() == 1:
+            local_resolution = self.resolutions_HD[self.pyqt5_dynamic_combo_resolution.currentIndex()]
+
+        self.worker_live_view.stop_live_view()
+        time.sleep(0.5)
+        index_changed = self.video_camera.change_input(camera_index)
+        if not index_changed:
+            self.camera_live_view(resolution=resolutions_SD[2])
+
+    def live_view_click_event(self, event):
+        x = event.pos().x()
+        y = event.pos().y()
+        widget_width = self.pyqt5_dynamic_label_cameraview.width()
+        widget_height = self.pyqt5_dynamic_label_cameraview.height()
+
+        percentage_x = (x / widget_width) * 100
+        percentage_y = (y / widget_height) * 100
+
+        self.worker_live_view.marker_position = (percentage_x, percentage_y)
+
+    def live_view_populate_with_resolutions(self):
+        index = self.pyqt5_dynamic_combo_aspect_ratio.currentIndex()
+        if index == 0:
+            self.pyqt5_dynamic_combo_resolution.clear()
+            for i in self.resolutions_SD:
+                self.pyqt5_dynamic_combo_resolution.addItem(str(i[0]) + 'x' + str(i[1]))
+        elif index == 1:
+            self.pyqt5_dynamic_combo_resolution.clear()
+            for i in self.resolutions_HD:
+                self.pyqt5_dynamic_combo_resolution.addItem(str(i[0]) + 'x' + str(i[1]))
+
+
 
     def getFolderPath(self, entry):
         folder = QFileDialog.getExistingDirectory(self, "Select output folder")
@@ -183,32 +251,20 @@ class MainUI(QDialog):
         #image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
         time.sleep(0.25)
-        # Crop image
-        if self.pyqt5_dynamic_odsc_checkbox_crop.isChecked():
-            image = self.crop_image(image, self.pyqt5_dynamic_odsc_entry_crop.text())
 
         # Rotate image
         if self.pyqt5_dynamic_odsc_checkbox_rotate.isChecked():
             image = self.rotate_image(image, self.pyqt5_dynamic_odsc_combo_rotation.currentText())
+
+        # Crop image
+        if self.pyqt5_dynamic_odsc_checkbox_crop.isChecked():
+            image = self.crop_image(image, self.pyqt5_dynamic_odsc_entry_crop.text())
 
         # Add image to UI Graph
         self.GraphWidgetLiveCapture.refresh_UI(image)
 
         # Save image
         cv2.imwrite(new_file_path, image)
-
-    def webcam_live_view(self):
-        #self.webcam.single_frame(resolution=(1920, 1080))
-        self.thread_live_view = QThread()
-        self.worker_live_view = LiveViewWorker()
-        self.worker_live_view.main_ui = self
-
-        self.worker_live_view.moveToThread(self.thread_live_view)
-        self.thread_live_view.started.connect(self.worker_live_view.live_view)
-        self.worker_live_view.finished.connect(self.thread_live_view.quit)
-        self.worker_live_view.finished.connect(self.worker_live_view.deleteLater)
-        self.thread_live_view.finished.connect(self.thread_live_view.deleteLater)
-        self.thread_live_view.start()
 
     def multi_capture(self):
         if self.camera.verifyDigiCam():

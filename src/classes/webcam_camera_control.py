@@ -1,14 +1,19 @@
 import os
 
 import cv2
-import matplotlib.pyplot as plt
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QPixmap, QImage
 from PyQt5.uic.properties import QtGui
-from matplotlib.animation import FuncAnimation
+
+from src.funcs.camera_functions import *
+
+resolutions_SD = [(800, 600), (1024, 768), (1440, 1080), (1920, 1440)]
+resolutions_HD = [(854, 480), (1280, 720), (1920, 1080), (2560, 1440)]
+resolutions_photo = [(1080, 720), (1200, 800), (1620, 1080), (3840, 2160)]
 
 
-class WebcamController:
-    def __init__(self, main_ui):
+class VideoCamera:
+    def __init__(self, main_ui=None):
         self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
         self.start_rect = None
@@ -22,7 +27,7 @@ class WebcamController:
         if not self.cap.isOpened():
             raise IOError("Cannot open webcam")
 
-    def start_live_view(self, resolution=(1280, 720)):
+    def start_live_view(self, resolution=(resolutions_SD[3])):
         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, resolution[0])
         self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, resolution[1])
 
@@ -59,15 +64,47 @@ class WebcamController:
         self.cap.release()
         cv2.destroyAllWindows()
 
-    def single_frame(self):
+    def change_input(self, index):
+        self.cap.release()
+        try:
+            self.cap = cv2.VideoCapture(index, cv2.CAP_DSHOW)
+            if not self.cap.isOpened():
+                return False
+
+        except:
+            self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+            if not self.cap.isOpened():
+                return False
+
+    def single_frame_liveview(self, marker_position, zoom=False, zoom_percentage=0, mark=False, marker_percentage=0):
         # Capture the frame
         ret, frame = self.cap.read()
+        qt_img = None
 
-        # Convert frame to QPixmap
-        frame = self.convert_cv_qt(frame)
+        if ret:
+            frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+
+            # Crop image
+            if zoom:
+                frame = crop_image(frame, scale=1 - zoom_percentage / 100)
+
+            # Add Marker to the frame
+            if mark:
+                if marker_position is None:
+                    marker_position = (frame.shape[1] / 2, frame.shape[0] / 2)
+                else:
+                    marker_position = convert_location_percentage_to_cv(marker_position, frame)
+                frame = mark_image(frame, marker_percentage, marker_position, frame.shape)
+
+
+            # Convert to QImage
+            flipped_img = cv2.flip(frame, 1)
+            qt_img = QImage(flipped_img.data, frame.shape[1], frame.shape[0], QImage.Format_RGB888)
+            qt_img = qt_img.scaled(640, 480, Qt.KeepAspectRatio)
 
         # Return frame
-        return frame
+        return qt_img
+
 
     def capture_image(self, resolution=(1920, 1080)):
         self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, resolution[0])
@@ -100,5 +137,5 @@ class WebcamController:
 
 if __name__ == "__main__":
     webcam = WebcamController()
-    webcam.capture_image()
-    webcam.start_live_view_2()
+    #webcam.capture_image()
+    webcam.start_live_view()
