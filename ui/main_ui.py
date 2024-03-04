@@ -43,7 +43,7 @@ class MainUI(QDialog):
         self.setWindowIcon(QIcon("icon.png"))
 
         self.resolutions_SD = [(800, 600), (1024, 768), (1440, 1080), (1920, 1440)]
-        self.resolutions_HD = [(854, 480), (1280, 720), (1920, 1080), (2560, 1440)]
+        self.resolutions_HD = [(854, 480), (1280, 720), (1920, 1080), (2560, 1440), (3264, 2160)]
 
         self.threads = []
         self.camera_details_list = []

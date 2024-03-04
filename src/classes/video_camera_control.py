@@ -16,6 +16,20 @@ class VideoCamera:
     def __init__(self, main_ui=None):
         self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
+        exposure = self.cap.get(cv2.CAP_PROP_EXPOSURE)
+        print(f"Current Exposure: {exposure}")
+
+        self.cap.set(cv2.CAP_PROP_EXPOSURE, -100)
+        exposure = self.cap.get(cv2.CAP_PROP_EXPOSURE)
+        print(f"Current MIN Exposure: {exposure}")
+
+        self.cap.set(cv2.CAP_PROP_EXPOSURE, 100)
+        exposure = self.cap.get(cv2.CAP_PROP_EXPOSURE)
+        print(f"Current MAX Exposure: {exposure}")
+
+        # self.cap.set(cv2.CAP_PROP_EXPOSURE, 0.01)
+        # self.cap.set(cv2.CAP_PROP_BRIGHTNESS, 0.5)
+
         self.start_rect = None
         self.end_rect = None
 
@@ -87,6 +101,7 @@ class VideoCamera:
         if ret:
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
+
             # Crop image
             if zoom:
                 frame = crop_image(frame, scale=1 - zoom_percentage / 100)
@@ -105,6 +120,7 @@ class VideoCamera:
 
             # Convert to QImage
             flipped_img = cv2.flip(frame, 1)
+            #flipped_img = frame
             qt_img = QImage(
                 flipped_img.data, frame.shape[1], frame.shape[0], QImage.Format_RGB888
             )
@@ -142,6 +158,19 @@ class VideoCamera:
             self.disply_width, self.display_height, Qt.KeepAspectRatio
         )
         return QPixmap.fromImage(p)
+
+    def subtract_background(self, frame, background):
+        # Convert the images to grayscale
+        gray_background = cv2.cvtColor(background, cv2.COLOR_BGR2GRAY)
+        gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        # Subtract the background from the current frame
+        diff = cv2.absdiff(gray_background, gray_frame)
+
+        # Apply a threshold to the subtracted image
+        _, bkg_sub_image = cv2.threshold(diff, 30, 255, cv2.THRESH_BINARY)
+
+        return bkg_sub_image
 
 
 if __name__ == "__main__":
