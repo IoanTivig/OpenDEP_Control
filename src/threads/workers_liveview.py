@@ -50,6 +50,8 @@ class LiveViewWorker(QObject):
                     zoom_percentage=zoom_percentage,
                     mark=mark,
                     marker_percentage=marker_percentage,
+                    grey_scale=self.main_ui.pyqt5_dynamic_odsc_checkbox_greyscale.isChecked(),
+                    bkg_subtraction=self.main_ui.pyqt5_dynamic_odsc_checkbox_bkgcorrection.isChecked()
                 )
 
                 # get size of the qt label

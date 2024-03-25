@@ -25,6 +25,7 @@ PS: Soon the software will be available as a standalone executable file.
 If you need any help with the installation, please contact me.
 
 ## Publications
+If you use this software in your research, please be kind and cite the following papers:
 1. [OpenDEP: An Open-Source Platform for Dielectrophoresis Spectra Acquisition and Analysis](https://pubs.acs.org/doi/10.1021/acsomega.3c06052)
 
 ## Other DEP Tools (not developed by me)
@@ -36,5 +37,6 @@ The software is tested on Windows 11, but it should work on other operating syst
 If you want to use your DSRL camera without a capture card you will need to install [digiCamControl](https://digicamcontrol.com/).
 The software is tested with Agilent 33220A function generator, but it should work with other Agilent function generators as well.
 If you want to use other function generators, you will need to change the code in the function_generator.py file.
+Thes software doesn't run whitout a video camera connected. This will be resolved in the future.
 
 

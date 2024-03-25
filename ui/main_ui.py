@@ -6,12 +6,14 @@ from PyQt5.QtCore import QThread
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QDialog, QFileDialog
 from PyQt5.uic import loadUi
+import json
 
 # Local imports #
 import src.classes.function_generator_control as func_gen
 from src.threads.workers_livecapture import *
 from src.threads.workers_liveview import *
 from src.classes.video_camera_control import *
+from src.classes.opendep_firmware_control import *
 from ui.resources.graphical_resources import *  # don't remove this line
 
 '''
@@ -51,12 +53,14 @@ class MainUI(QDialog):
         self.stop_thread = False
         self.pause_thread = False
 
-        self.live_view_populate_with_resolutions()
         self.live_view_populate_with_cameras()
-        self.pyqt5_dynamic_combo_aspect_ratio.setCurrentIndex(0)
+        self.pyqt5_dynamic_combo_aspect_ratio.setCurrentIndex(1)
+        self.live_view_populate_with_resolutions()
         self.pyqt5_dynamic_combo_resolution.setCurrentIndex(2)
-        self.resolution = self.resolutions_SD[2]
+        self.resolution = self.resolutions_HD[2]
+        self.load_instrument_connection_settings()
 
+        self.firmware = OpenDepFirmware()
         self.generator = func_gen.FunctionGenerator()
         self.video_camera = VideoCamera(main_ui=self)
         self.dsrl_camera = DSRLCamera()
@@ -94,6 +98,9 @@ class MainUI(QDialog):
             self.live_view_populate_with_resolutions
         )
         self.pyqt5_dynamic_button_refresh_live_view.clicked.connect(
+            self.refresh_live_view
+        )
+        self.pyqt5_dynamic_button_connect_live_view.clicked.connect(
             self.refresh_live_view
         )
 
@@ -142,6 +149,50 @@ class MainUI(QDialog):
                 "single_capture_" + str(self.single_capture_index)
             )
         )
+        # Illumination connections
+        self.pyqt5_dynamic_odsc_button_illumination_on.clicked.connect(self.firmware.ledON)
+        self.pyqt5_dynamic_odsc_button_illumination_off.clicked.connect(self.firmware.ledOFF)
+        self.pyqt5_dynamic_odsc_slider_illumination_value.sliderReleased.connect(
+            lambda: self.firmware.ledDIM(
+                self.pyqt5_dynamic_odsc_slider_illumination_value.value()
+            )
+        )
+
+        # Camera parameters connections
+        self.pyqt5_dynamic_odsc_slider_exposure_value.sliderReleased.connect(
+            lambda: self.video_camera.set_parameter_by_percentage(
+                "exposure",
+                self.pyqt5_dynamic_odsc_slider_exposure_value.value()
+            )
+        )
+        self.pyqt5_dynamic_odsc_slider_brightness_value.sliderReleased.connect(
+            lambda: self.video_camera.set_parameter_by_percentage(
+                "brightness",
+                self.pyqt5_dynamic_odsc_slider_brightness_value.value()
+            )
+        )
+        self.pyqt5_dynamic_odsc_slider_contrast_value.sliderReleased.connect(
+            lambda: self.video_camera.set_parameter_by_percentage(
+                "contrast",
+                self.pyqt5_dynamic_odsc_slider_contrast_value.value()
+            )
+        )
+        self.pyqt5_dynamic_odsc_slider_saturation_value.sliderReleased.connect(
+            lambda: self.video_camera.set_parameter_by_percentage(
+                "saturation",
+                self.pyqt5_dynamic_odsc_slider_saturation_value.value()
+            )
+        )
+
+        self.pyqt5_dynamic_button_capture_bkgcorrection_image.clicked.connect(self.capture_bkg_image)
+
+        # Console connections
+        self.pyqt5_dynamic_odsc_button_console_input.clicked.connect(self.console_input)
+        self.pyqt5_dynamic_odsc_button_reload_console_coms.clicked.connect(self.refresh_console_coms)
+        self.pyqt5_dynamic_odsc_button_console_connect.clicked.connect(self.connect_instrument)
+
+        # Instrument connections
+        self.pyqt5_dynamic_odsc_button_verify_instrument_status.clicked.connect(self.verify_connection)
 
     # General methods
     def get_folder_path(self, entry):
@@ -154,6 +205,87 @@ class MainUI(QDialog):
         )
         if check:
             entry.setText(file)
+
+    def save_instrument_connection_settings(self):
+        # Save the current settings for the instruments (camera and OpenDEP connection) into a json file
+        settings = {}
+
+        # Add the settings of the camera and OpenDEP connection to the dictionary
+        settings['camera'] = {
+            'camera_index': self.pyqt5_dynamic_combo_camera_index.currentIndex(),
+        }
+        settings['opendep'] = {
+            'port': self.pyqt5_dynamic_odsc_combo_console_coms.currentText().split(" ")[0],
+            'baudrate': self.pyqt5_dynamic_odsc_combo_console_boadrates.currentText(),
+        }
+
+        # Use the json.dump() function to write the dictionary to a JSON file
+        with open('src/saves/settings.json', 'w') as f:
+            json.dump(settings, f, indent=4)
+
+    def load_instrument_connection_settings(self):
+        # Load the settings for the instruments (camera and OpenDEP connection) from a json file
+        try:
+            with open('src/saves/settings.json', 'r') as f:
+                settings = json.load(f)
+
+            # Set the camera index
+            self.pyqt5_dynamic_combo_camera_index.setCurrentIndex(settings['camera']['camera_index'])
+
+            # Set the OpenDEP connection settings
+            self.pyqt5_dynamic_odsc_combo_console_coms.setCurrentText(settings['opendep']['port'])
+            self.pyqt5_dynamic_odsc_combo_console_boadrates.setCurrentText(settings['opendep']['baudrate'])
+            self.firmware.connect_instrument()
+        except:
+            print("No settings file found")
+
+    def closeEvent(self, event):
+        self.save_instrument_connection_settings()
+        print("Settings saved")
+        event.accept()
+
+    # Console methods
+    def console_input(self):
+        input_text = self.pyqt5_dynamic_odsc_entry_console_input.text()
+        self.pyqt5_dynamic_odsc_plaintext_console.appendPlainText("COMMAND: " + input_text)
+        response_text = self.firmware.send_command(input_text)
+        self.pyqt5_dynamic_odsc_plaintext_console.appendPlainText("RESPONSE: " + response_text)
+        self.pyqt5_dynamic_odsc_entry_console_input.clear()
+
+    def connect_instrument(self):
+        port = self.pyqt5_dynamic_odsc_combo_console_coms.currentText().split(" ")[0]
+        baudrate = int(self.pyqt5_dynamic_odsc_combo_console_boadrates.currentText())
+        self.firmware.set_baudrate(baudrate)
+        self.firmware.set_port(port)
+        try:
+            self.firmware.connect_instrument()
+            time.sleep(2.5)
+            response_text = self.firmware.send_command("OPENDEP ID")
+            if "OPENDEP_INSTRUMENT" in response_text:
+                self.pyqt5_dynamic_odsc_plaintext_console.appendPlainText("OPENDEP INSTRUMENT CONNECTED")
+            else:
+                self.pyqt5_dynamic_odsc_plaintext_console.appendPlainText(
+                    "INSTRUMENT CONNECTED, BUT NOT OPENDEP"
+                )
+        except:
+            self.pyqt5_dynamic_odsc_plaintext_console.appendPlainText(
+                "NO INSTRUMENT FOUND / NOT COMPATIBLE / WRONG BAUDRATE / WRONG PORT")
+
+    def verify_connection(self):
+        if self.firmware.verify_connection():
+            print("Connected")
+            self.pyqt5_dynamic_odsc_label_opendep_status.setEnabled(True)
+        else:
+            print("Not Connected")
+            self.pyqt5_dynamic_odsc_label_opendep_status.setEnabled(False)
+
+        #print(self.video_camera.get_camera_exposure())
+
+    def refresh_console_coms(self):
+        self.firmware.get_all_ports()
+        self.pyqt5_dynamic_odsc_combo_console_coms.clear()
+        for i in self.firmware.port_list:
+            self.pyqt5_dynamic_odsc_combo_console_coms.addItem(i)
 
     # Live Capture methods
     def camera_live_view(self):
@@ -294,6 +426,21 @@ class MainUI(QDialog):
             self.capture_video_camera(file_name)
         elif self.pyqt5_dynamic_radio_use_dsrl_camera.isChecked():
             self.capture_dsrl_camera(file_name)
+
+    def capture_bkg_image(self):
+        image = self.video_camera.capture_image()
+        self.video_camera.bkg_correction_img = image
+        cv2.imwrite("src/saves/bkg_corr.jpg", image)
+        response = self.firmware.send_command("OPENDEP LIGHT OFF")
+        print(response)
+
+        time.sleep(2)
+        dark_image = self.video_camera.capture_image()
+        self.video_camera.dark_correction_img = dark_image
+        cv2.imwrite("src/saves/dark_corr.jpg", dark_image)
+        response = self.firmware.send_command("OPENDEP LIGHT ON")
+        print(response)
+
 
     def capture_dsrl_camera(self, file_name):
         # Check if image was saved and reload it thorough OpenCV

@@ -4,6 +4,7 @@ PyQt5~=5.15.10
 numpy~=1.26.1
 psutil~=5.9.6
 PyVISA~=1.13.0
+PyVISA-py~=0.7.1
 scikit-image~=0.22.0
 zeroconf~=0.119.0
 pyserial~=3.5
