@@ -10,7 +10,7 @@ and compatibility will be improved.
 It is a part of OpenDEP project, and one of the three programs developed: 
 1. [OpenDEP Compute](https://github.com/IoanTivig/OpenDEP) (for spectra fitting and data conversion)
 2. [OpenDEP Control](https://github.com/IoanTivig/OpenDEP_Control) (for experiments automation and control of machines)
-3. OpenDEP View (for visualization of spectra and spectra generation based on parameters).
+3. [OpenDEP View](https://github.com/IoanTivig/OpenDEP_View) (for visualization of spectra and spectra generation based on parameters).
 
 Published under GNU GPL v3.0 license.
 
